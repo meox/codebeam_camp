@@ -43,3 +43,6 @@ npm-debug.log
 
 # code
 /.elixir_ls
+
+.directory
+

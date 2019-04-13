@@ -1,35 +1,32 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+  <img src="<%= Routes.static_path(@conn, "/images/a.png") %>"/>
+  <p>The first <strong>Coding Camp</strong><br/>focus on the <strong>*BEAM*</strong> Programming languages.</p>
 </section>
 
 <section class="row">
   <article class="column">
-    <h2>Resources</h2>
+    <h2>Languages</h2>
     <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
+      <li><a href="https://www.erlang.org">Erlang</a></li>
+      <li><a href="https://elixir-lang.org">Elixir</a></li>
     </ul>
   </article>
   <article class="column">
-    <h2>Help</h2>
+    <h2>Upcoming events</h2>
     <ul>
+      <%= for event <- @events do %>
       <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
+        <a href="<%= event.url%>" target="_blank">
+          <%= event.name %>, <%= event.date %> (<%= event.location %>)
+        </a>
       </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
+      <%= end %>
     </ul>
   </article>
+</section>
+<section class="row">
+  <form style="align:center;">
+    <input class="email" placeholder="me@email.com" />
+    <input type="submit" value="Register">
+  </form>
 </section>

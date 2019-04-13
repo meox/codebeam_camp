@@ -1,3 +1,14 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+
+.email{
+  font-size: 1em;
+  color: black;
+  height: 50px;
+  min-width: 350px;
+  background-color: #fff;
+  border: 2px solid slateblue;
+  padding: 5px;
+  margin: 5px;
+}
