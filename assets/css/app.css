@@ -1,6 +1,15 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css);
+
+body{
+  background-color: #f6f1f8;
+}
+
+.title{
+  font-family: 'Fira Code', monospace;
+}
 
 .email{
   font-size: 1em;
