@@ -20,15 +20,12 @@
           <%= event.name %>, <%= event.date %> (<%= event.location %>)
         </a>
       </li>
-      <%= end %>
+      <% end %>
     </ul>
   </article>
 </section>
 <section class="row" style="margin-top: 5%;">
   <div style="width: 70%; margin: auto;">
-    <form>
-      <input class="email" placeholder="me@email.com" />
-      <button class="register" type="submit">Subscribe</button>
-    </form>
+    <%= live_render(@conn, CodeBeam.RegisterLiveView) %>
   </div>
 </section>
