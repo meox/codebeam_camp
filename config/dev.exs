@@ -52,7 +52,8 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/codebeam_camp_web/{live,views}/.*(ex)$",
-      ~r"lib/codebeam_camp_web/templates/.*(eex)$"
+      ~r"lib/codebeam_camp_web/templates/.*(eex)$",
+      ~r{lib/codebeam_camp_web/live/.*(ex)$}
     ]
   ]
 
