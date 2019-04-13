@@ -65,9 +65,9 @@ select {
 .phx-hero {
   text-align: center;
   border-bottom: 1px solid #e3e3e3;
-  background: #eee;
+  background: rgb(245, 245, 245);
   border-radius: 6px;
-  padding: 3em;
+  padding: 2em;
   margin-bottom: 3rem;
   font-weight: 200;
   font-size: 120%;

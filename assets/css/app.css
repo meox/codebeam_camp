@@ -4,11 +4,23 @@
 
 .email{
   font-size: 1em;
+  border-radius: 5px;
   color: black;
   height: 50px;
-  min-width: 350px;
+  min-width: 300px;
   background-color: #fff;
   border: 2px solid slateblue;
   padding: 5px;
   margin: 5px;
+}
+
+.register{
+  font-size: 1em;
+  background-color: slateblue;
+  height: 48px;
+  border: 0px;
+}
+
+.register:hover{
+  background-color: rgb(255, 0, 234);
 }
