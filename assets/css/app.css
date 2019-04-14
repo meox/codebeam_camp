@@ -30,6 +30,13 @@ body{
   border: 0px;
 }
 
+.register-invalid{
+  font-size: 1em;
+  background-color: indianred;
+  height: 48px;
+  border: 0px;
+}
+
 .register:hover{
   background-color: rgb(255, 0, 234);
 }

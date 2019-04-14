@@ -11,7 +11,7 @@ defmodule CodebeamCamp.RegisterDB do
 
   @impl true
   def init(_) do
-    :email_table = PersistentEts.new(:email_table, "email_table.tab", [:named_table])
+    :email_table = PersistentEts.new(:email_table, "/tmp/codebeam_camp_email_table.tab", [:named_table])
     {:ok, %{}}
   end
 
