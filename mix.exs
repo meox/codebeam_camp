@@ -41,6 +41,7 @@ defmodule CodebeamCamp.MixProject do
       {:bamboo, "~> 1.2"},
       {:poison, "~> 3.1"},
       {:gettext, "~> 0.11"},
+      {:persistent_ets, "~> 0.1.0"},
       {:jason, "~> 1.0"},
       {:distillery, "~> 2.0", runtime: false},
       {:plug_cowboy, "~> 2.0"}

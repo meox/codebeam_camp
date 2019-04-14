@@ -1,4 +1,4 @@
-defmodule CodeBeam.RegisterLiveView do
+defmodule CodebeamCamp.RegisterLiveView do
   use Phoenix.LiveView
   require Logger
   alias CodebeamCamp.{Mailer, RegisterDB}
@@ -17,7 +17,7 @@ defmodule CodeBeam.RegisterLiveView do
   end
 
   def mount(_session, socket) do
-    Logger.info("Mounting CodeBeam.RegisterLiveView")
+    Logger.info("Mounting CodebeamCamp.RegisterLiveView")
     {:ok, assign(socket, registered: false, btn_status: "Subscribe")}
   end
 
