@@ -35,8 +35,13 @@ defmodule CodebeamCamp.MixProject do
       {:phoenix, "~> 1.4.3"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:elixir_uuid, "~> 1.2"},
+      {:bamboo, "~> 1.2"},
+      {:poison, "~> 3.1"},
       {:gettext, "~> 0.11"},
+      {:persistent_ets, "~> 0.1.0"},
       {:jason, "~> 1.0"},
       {:distillery, "~> 2.0", runtime: false},
       {:plug_cowboy, "~> 2.0"}

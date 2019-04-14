@@ -9,9 +9,9 @@ defmodule CodebeamCamp.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      CodebeamCampWeb.Endpoint
+      CodebeamCampWeb.Endpoint,
       # Starts a worker by calling: CodebeamCamp.Worker.start_link(arg)
-      # {CodebeamCamp.Worker, arg},
+      CodebeamCamp.RegisterDB
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

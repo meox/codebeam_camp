@@ -14,6 +14,15 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
   render_errors: [view: CodebeamCampWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: CodebeamCamp.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :codebeam_camp, CodebeamCampWeb.Endpoint,
+  live_view: [
+    signing_salt: "h49p0NkDH9lLo614f9mObz8ahPioq1PY"
+  ]
+
+config :codebeam_camp, CodebeamCamp.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

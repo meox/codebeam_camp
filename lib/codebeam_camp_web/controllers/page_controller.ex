@@ -1,8 +1,17 @@
 defmodule CodebeamCampWeb.PageController do
   use CodebeamCampWeb, :controller
 
+  alias CodebeamCamp.RegisterDB
+
   def index(conn, _params) do
     render(conn, "index.html", events: events())
+  end
+
+  def active_subscription(conn, %{"email" => email, "hash" => hash}) do
+    case RegisterDB.activate(email, hash) do
+      {:ok, :validated} -> json(conn, %{"ok" => true})
+      {:error, reason} -> json(conn, %{"ok" => false, "reason" => reason})
+    end
   end
 
   def events do
