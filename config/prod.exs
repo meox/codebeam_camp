@@ -12,7 +12,6 @@ use Mix.Config
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: "www.codebeam.camp", port: 80],
-  check_origin: ["https://www.codebeam.camp"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -32,6 +31,9 @@ config :codebeam_camp, CodebeamCamp.Repo,
   database: "",
   ssl: true,
   pool_size: 1 # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
+
+config :codebeam_camp, CodebeamCampWeb.Endpoint,
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # ## SSL Support
 #
