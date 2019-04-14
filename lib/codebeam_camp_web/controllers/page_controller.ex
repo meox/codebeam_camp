@@ -7,6 +7,15 @@ defmodule CodebeamCampWeb.PageController do
     render(conn, "index.html", events: events())
   end
 
+  def active_subscription_email(conn, %{"email" => email, "hash" => hash}) do
+    case RegisterDB.activate(email, hash) do
+      {:ok, :validated} ->
+        html(conn, "Subscription activated for <strong>#{email}</strong>")
+      {:error, reason} ->
+        html(conn, "Error activating subscription for <strong>#{email}</strong><br><br>Error: #{reason}")
+    end
+  end
+
   def active_subscription(conn, %{"email" => email, "hash" => hash}) do
     case RegisterDB.activate(email, hash) do
       {:ok, :validated} -> json(conn, %{"ok" => true})

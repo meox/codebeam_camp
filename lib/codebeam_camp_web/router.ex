@@ -18,6 +18,7 @@ defmodule CodebeamCampWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/active_sub", PageController, :active_subscription_email
   end
 
   # Other scopes may use custom stacks.
