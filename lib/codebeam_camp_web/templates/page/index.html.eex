@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <img src="<%= Routes.static_path(@conn, "/images/logo_web_750.png") %>"/>
+  <img src="<%= Routes.static_path(@conn, "/images/logo_web.png") %>" width="500px" />
   <p>The first <strong>Coding Camp</strong><br/>focus on the <strong>*BEAM*</strong> Programming languages.</p>
 </section>
 
