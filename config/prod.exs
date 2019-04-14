@@ -11,7 +11,8 @@ use Mix.Config
 # before starting your production server.
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "codebeam.camp", port: 80],
+  url: [host: "www.codebeam.camp", port: 80],
+  check_origin: ["https://www.codebeam.camp"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
