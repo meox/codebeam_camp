@@ -21,7 +21,9 @@ defmodule CodebeamCampWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CodebeamCampWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", CodebeamCampWeb do
+    pipe_through :api
+
+    get "/active_sub", PageController, :active_subscription
+  end
 end

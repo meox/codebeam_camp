@@ -5,6 +5,10 @@ defmodule CodebeamCampWeb.PageController do
     render(conn, "index.html", events: events())
   end
 
+  def active_subscription(conn, %{"email" => email, "hash" => hash}) do
+    json(conn, %{})
+  end
+
   def events do
     [
       %{

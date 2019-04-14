@@ -19,6 +19,10 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
     signing_salt: "h49p0NkDH9lLo614f9mObz8ahPioq1PY"
   ]
 
+config :codebeam_camp, CodebeamCamp.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
