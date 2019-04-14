@@ -1,8 +1,8 @@
 <section class="phx-hero">
-  <img src="<%= Routes.static_path(@conn, "/images/logo_web.png") %>" width="500px" />
-  <p>The first <strong>Coding Camp</strong><br/>focus on the <strong>*BEAM*</strong> Programming languages.</p>
+  <img src="<%= Routes.static_path(@conn, "/images/logo_web.png") %>" width="475px" />
+  <p>The first <strong>Coding Camp</strong>focus on<br/>
+  <strong>Erlang</strong> and <strong>Elixir</strong> Programming Languages.</p>
 </section>
-
 <section class="row">
   <article class="column">
     <h2>Languages</h2>
@@ -28,4 +28,8 @@
   <div style="width: 70%; margin: auto;">
     <%= live_render(@conn, CodeBeam.RegisterLiveView) %>
   </div>
+  <br>
 </section>
+<div style="width:40%;margin:auto">
+  For more info: <strong>meox</strong><i>@</i><strong>codebeam</strong><i>.</i><strong>camp</strong>
+</div>
