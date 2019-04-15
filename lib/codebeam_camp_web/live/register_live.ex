@@ -30,11 +30,11 @@ defmodule CodebeamCamp.RegisterLiveView do
 
     case RegisterDB.register_email(email) do
       {:ok, hash} ->
-        Mailer.send("glmeocci@gmail.com", hash)
+        Mailer.send(email, hash)
 
         {:noreply, assign(socket, :registered, true)}
 
-      {:error, :already_registered, _} ->
+      {:error, :already_registered} ->
         {:noreply, assign(socket, registered: true, email: "Already Subscribed")}
     end
   end
