@@ -40,8 +40,8 @@ config :codebeam_camp, CodebeamCamp.Repo,
   # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
   pool_size: 1
 
-config :codebeam_camp, CodebeamCampWeb.Endpoint,
-  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: "www.codebeam.camp"]
+#config :codebeam_camp, CodebeamCampWeb.Endpoint,
+#  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: "www.codebeam.camp"]
 
 # ## SSL Support
 #
