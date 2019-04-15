@@ -41,7 +41,7 @@ config :codebeam_camp, CodebeamCamp.Repo,
   pool_size: 1
 
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
-  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: nil]
+  force_ssl: [hsts: true, host: nil]
 
 # ## SSL Support
 #
