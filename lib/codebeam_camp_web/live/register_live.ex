@@ -28,14 +28,16 @@ defmodule CodebeamCamp.RegisterLiveView do
   def handle_event("register", %{"email" => email} = value, socket) do
     Logger.info("register user: #{inspect(value)}")
 
-    case RegisterDB.register_email(email) do
-      {:ok, hash} ->
-        Mailer.send(email, hash)
-
-        {:noreply, assign(socket, :registered, true)}
+    with true <- is_valid_email(email),
+         {:ok, hash} <- RegisterDB.register_email(email) do
+      Mailer.send(email, hash)
+      {:noreply, assign(socket, :registered, true)}
+    else
+      false ->
+        {:noreply, assign(socket, registered: false, btn_status: "Invalid")}
 
       {:error, :already_registered} ->
-        {:noreply, assign(socket, registered: true, email: "Already Subscribed")}
+        {:noreply, assign(socket, registered: false, btn_status: "Present")}
     end
   end
 
@@ -47,10 +49,17 @@ defmodule CodebeamCamp.RegisterLiveView do
   def handle_event("validate", %{"email" => email} = value, socket) do
     Logger.info("validate user: #{inspect(value)}")
 
-    if Regex.match?(~r(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$), email) do
-      {:noreply, assign(socket, email_valid: true, registered: false)}
+    if is_valid_email(email) do
+      {:noreply, assign(socket, email_valid: true, registered: false, btn_status: "Subscribe")}
     else
-      {:noreply, assign(socket, email_valid: false, registered: false)}
+      {:noreply, assign(socket, email_valid: false, registered: false, btn_status: "Invalid")}
     end
   end
+
+  ##### PRIVATE #####
+
+  defp is_valid_email(""), do: false
+
+  defp is_valid_email(email),
+    do: Regex.match?(~r(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$), email)
 end
