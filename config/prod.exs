@@ -15,6 +15,7 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
   check_origin: [
     "http://www.codebeam.camp",
     "https://www.codebeam.camp",
+    "http://united-clear-argali.gigalixirapp.com",
     "https://united-clear-argali.gigalixirapp.com"
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
@@ -40,8 +41,8 @@ config :codebeam_camp, CodebeamCamp.Repo,
   # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
   pool_size: 1
 
-#config :codebeam_camp, CodebeamCampWeb.Endpoint,
-#  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: "www.codebeam.camp"]
+config :codebeam_camp, CodebeamCampWeb.Endpoint,
+  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: nil]
 
 # ## SSL Support
 #
