@@ -29,7 +29,7 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
   # Without this line, your app will not start the web server!
   server: true,
   secret_key_base: "${SECRET_KEY_BASE}",
-  url: [host: "${APP_NAME}.gigalixirapp.com", port: 443],
+  url: [host: "www.codebeam.camp", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :codebeam_camp, CodebeamCamp.Repo,
@@ -41,7 +41,7 @@ config :codebeam_camp, CodebeamCamp.Repo,
   pool_size: 1
 
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
-  force_ssl: [hsts: true, host: nil]
+  force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: nil]
 
 # ## SSL Support
 #
