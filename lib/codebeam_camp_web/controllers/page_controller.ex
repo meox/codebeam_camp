@@ -11,8 +11,12 @@ defmodule CodebeamCampWeb.PageController do
     case RegisterDB.activate(email, hash) do
       {:ok, :validated} ->
         html(conn, "Subscription activated for <strong>#{email}</strong>")
+
       {:error, reason} ->
-        html(conn, "Error activating subscription for <strong>#{email}</strong><br><br>Error: #{reason}")
+        html(
+          conn,
+          "Error activating subscription for <strong>#{email}</strong><br><br>Error: #{reason}"
+        )
     end
   end
 

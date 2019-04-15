@@ -27,11 +27,13 @@ defmodule CodebeamCamp.RegisterLiveView do
 
   def handle_event("register", %{"email" => email} = value, socket) do
     Logger.info("register user: #{inspect(value)}")
+
     case RegisterDB.register_email(email) do
       {:ok, hash} ->
         Mailer.send("glmeocci@gmail.com", hash)
 
         {:noreply, assign(socket, :registered, true)}
+
       {:error, :already_registered, _} ->
         {:noreply, assign(socket, registered: true, email: "Already Subscribed")}
     end
@@ -44,6 +46,7 @@ defmodule CodebeamCamp.RegisterLiveView do
 
   def handle_event("validate", %{"email" => email} = value, socket) do
     Logger.info("validate user: #{inspect(value)}")
+
     if Regex.match?(~r(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$), email) do
       {:noreply, assign(socket, email_valid: true, registered: false)}
     else

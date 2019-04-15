@@ -11,7 +11,9 @@ defmodule CodebeamCamp.RegisterDB do
 
   @impl true
   def init(_) do
-    :email_table = PersistentEts.new(:email_table, "/tmp/codebeam_camp_email_table.tab", [:named_table])
+    :email_table =
+      PersistentEts.new(:email_table, "/tmp/codebeam_camp_email_table.tab", [:named_table])
+
     {:ok, %{}}
   end
 
@@ -19,6 +21,7 @@ defmodule CodebeamCamp.RegisterDB do
     case :ets.lookup(:email_table, email) do
       [] ->
         do_register(email)
+
       [_record] ->
         {:error, :already_registered}
     end
@@ -28,18 +31,24 @@ defmodule CodebeamCamp.RegisterDB do
     case :ets.lookup(:email_table, email) do
       [] ->
         {:error, "email not present"}
+
       [{^email, %Email{hash: ^hash} = record}] ->
         do_activate(email, record)
         {:ok, :validated}
+
       _ ->
         {:error, "bad arguments"}
     end
   end
 
   def list_emails do
-    :ets.foldr(fn {k, v}, acc ->
-      [{k, v.hash, v.validated} | acc]
-    end, [], :email_table)
+    :ets.foldr(
+      fn {k, v}, acc ->
+        [{k, v.hash, v.validated} | acc]
+      end,
+      [],
+      :email_table
+    )
   end
 
   @impl true

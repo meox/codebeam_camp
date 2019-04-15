@@ -12,7 +12,11 @@ use Mix.Config
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: "www.codebeam.camp", port: 80],
-  check_origin: ["http://www.codebeam.camp", "https://www.codebeam.camp", "https://united-clear-argali.gigalixirapp.com"],
+  check_origin: [
+    "http://www.codebeam.camp",
+    "https://www.codebeam.camp",
+    "https://united-clear-argali.gigalixirapp.com"
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -20,8 +24,10 @@ config :logger, level: :info
 
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: {:system, "PORT"}], # Needed for Phoenix 1.2 and 1.4. Doesn't hurt for 1.3.
-  server: true, # Without this line, your app will not start the web server!
+  # Needed for Phoenix 1.2 and 1.4. Doesn't hurt for 1.3.
+  http: [port: {:system, "PORT"}],
+  # Without this line, your app will not start the web server!
+  server: true,
   secret_key_base: "${SECRET_KEY_BASE}",
   url: [host: "${APP_NAME}.gigalixirapp.com", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json"
@@ -31,7 +37,8 @@ config :codebeam_camp, CodebeamCamp.Repo,
   url: "${DATABASE_URL}",
   database: "",
   ssl: true,
-  pool_size: 1 # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
+  # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
+  pool_size: 1
 
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: "www.codebeam.camp"]
