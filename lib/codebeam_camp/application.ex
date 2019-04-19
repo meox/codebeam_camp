@@ -8,6 +8,7 @@ defmodule CodebeamCamp.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      CodebeamCamp.Repo,
       # Start the endpoint when the application starts
       CodebeamCampWeb.Endpoint,
       # Starts a worker by calling: CodebeamCamp.Worker.start_link(arg)

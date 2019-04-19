@@ -7,6 +7,9 @@
 # General application configuration
 use Mix.Config
 
+config :codebeam_camp,
+  ecto_repos: [CodebeamCamp.Repo]
+
 # Configures the endpoint
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
   url: [host: "localhost"],

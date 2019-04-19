@@ -66,3 +66,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Configure your database
+config :codebeam_camp, CodebeamCamp.Repo,
+  username: "postgres",
+  password: "Shiva1982",
+  database: "codebeam_camp_dev",
+  hostname: "localhost",
+  pool_size: 10
