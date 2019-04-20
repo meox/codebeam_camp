@@ -1,7 +1,8 @@
 defmodule CodebeamCamp.RegisterDB do
   use GenServer
 
-  alias CodebeamCamp.Email
+  alias CodebeamCamp.{Email, Repo, User}
+  import Ecto.Query, only: [from: 2]
 
   @me __MODULE__
 
@@ -11,9 +12,6 @@ defmodule CodebeamCamp.RegisterDB do
 
   @impl true
   def init(_) do
-    :email_table =
-      PersistentEts.new(:email_table, "/tmp/codebeam_camp_email_table.tab", [:named_table])
-
     {:ok, %{}}
   end
 
@@ -67,6 +65,19 @@ defmodule CodebeamCamp.RegisterDB do
   end
 
   ##### PRIVATE #####
+
+  def save_into_db(email, hash) do
+    %User{}
+    |> User.changeset(%{email: email, hash: hash})
+  end
+
+  @spec lookup(String.t) :: {:ok, any()} | {:error, atom()}
+  def lookup(email) do
+    query = from u in User,
+          where: u.email == ^email,
+          select: u
+    Repo.one(query)
+  end
 
   defp do_register(email) do
     GenServer.call(@me, {:register, email})

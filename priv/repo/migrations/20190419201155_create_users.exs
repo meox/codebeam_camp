@@ -4,10 +4,12 @@ defmodule CodebeamCamp.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :email, :string
-      add :hash, :float
-      add :validated, :bool
+      add :hash, :string
+      add :validated, :boolean, default: false
 
       timestamps()
     end
+
+    create unique_index(:users, [:email])
   end
 end

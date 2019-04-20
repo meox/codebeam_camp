@@ -1,6 +1,6 @@
 <section class="phx-hero">
   <img src="<%= Routes.static_path(@conn, "/images/logo_web.png") %>" width="475px" />
-  <p>The first <strong>Coding Camp</strong>focus on<br/>
+  <p>The first <strong>Coding Camp</strong> focus on<br/>
   <strong>Erlang</strong> and <strong>Elixir</strong> Programming Languages.</p>
 </section>
 <section class="row">
