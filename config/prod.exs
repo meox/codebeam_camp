@@ -10,13 +10,18 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "www.codebeam.camp", port: 80],
+  http: [:inet6, port: System.get_env("PORT") || 80],
+  url: [host: "www.codebeam.camp", port: 443],
   check_origin: [
     "http://www.codebeam.camp",
-    "https://www.codebeam.camp",
-    "http://united-clear-argali.gigalixirapp.com",
-    "https://united-clear-argali.gigalixirapp.com"
+    "https://www.codebeam.camp"
+  ],
+  https: [
+    :inet6,
+    port: 443,
+    cipher_suite: :strong,
+    keyfile: "/etc/letsencrypt/live/www.codebeam.camp/privkey.pem",
+    certfile: "/etc/letsencrypt/live/www.codebeam.camp/fullchain.pem"
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
@@ -24,27 +29,25 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
 config :logger, level: :info
 
 config :codebeam_camp, CodebeamCampWeb.Endpoint,
-  load_from_system_env: true,
-  # Needed for Phoenix 1.2 and 1.4. Doesn't hurt for 1.3.
-  http: [port: {:system, "PORT"}],
-  # Without this line, your app will not start the web server!
-  server: true,
-  secret_key_base: "${SECRET_KEY_BASE}",
-  url: [host: "www.codebeam.camp", port: 443],
-  cache_static_manifest: "priv/static/cache_manifest.json"
-
-config :codebeam_camp, CodebeamCamp.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: "${DATABASE_URL}",
-  database: "",
-  ssl: true,
-  # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
-  pool_size: 1
-
-config :codebeam_camp, CodebeamCampWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true, host: nil]
 
 # ## SSL Support
+#
+# IMPORTANT NOTES:
+# - Congratulations! Your certificate and chain have been saved at:
+#   /etc/letsencrypt/live/www.codebeam.camp/fullchain.pem
+#   Your key file has been saved at:
+#   /etc/letsencrypt/live/www.codebeam.camp/privkey.pem
+#   Your cert will expire on 2019-07-19. To obtain a new or tweaked
+#   version of this certificate in the future, simply run certbot
+#   again. To non-interactively renew *all* of your certificates, run
+#   "certbot renew"
+# - Your account credentials have been saved in your Certbot
+#   configuration directory at /etc/letsencrypt. You should make a
+#   secure backup of this folder now. This configuration directory will
+#   also contain certificates and private keys obtained by Certbot so
+#   making regular backups of this folder is ideal.
+# - If you like Certbot, please consider supporting our work by:
 #
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
