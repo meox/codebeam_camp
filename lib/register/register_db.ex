@@ -1,7 +1,7 @@
 defmodule CodebeamCamp.RegisterDB do
   use GenServer
 
-  alias CodebeamCamp.{Email, Repo, User}
+  alias CodebeamCamp.{Repo, User}
   import Ecto.Query, only: [from: 2]
 
   @me __MODULE__
@@ -16,74 +16,65 @@ defmodule CodebeamCamp.RegisterDB do
   end
 
   def register_email(email) do
-    case :ets.lookup(:email_table, email) do
-      [] ->
-        do_register(email)
-
-      [_record] ->
-        {:error, :already_registered}
-    end
+    GenServer.call(@me, {:register, email})
   end
 
   def activate(email, hash) do
-    case :ets.lookup(:email_table, email) do
-      [] ->
-        {:error, "email not present"}
-
-      [{^email, %Email{hash: ^hash} = record}] ->
-        do_activate(email, record)
-        {:ok, :validated}
-
-      _ ->
-        {:error, "bad arguments"}
-    end
+    GenServer.call(@me, {:activate, email, hash})
   end
 
-  def list_emails do
-    :ets.foldr(
-      fn {k, v}, acc ->
-        [{k, v.hash, v.validated} | acc]
-      end,
-      [],
-      :email_table
-    )
+  def list_emails(with_pending \\ false) do
+    query =
+      from(u in User,
+        where: u.validated == ^with_pending
+      )
+
+    query
+    |> Repo.all()
+    |> Enum.map(fn %User{} = u ->
+      IO.puts("#{u.email}, h:#{u.hash}, validate: #{u.validated}")
+    end)
   end
 
   @impl true
   def handle_call({:register, email}, _from, state) do
     hash = UUID.uuid4()
-    record = %Email{hash: hash}
-    :ets.insert(:email_table, {email, record})
-    {:reply, {:ok, hash}, state}
+
+    case save_into_db(email, hash) do
+      {:ok, _record} ->
+        {:reply, {:ok, hash}, state}
+
+      {:error, [{:email, _error}]} ->
+        {:reply, {:error, :already_registered}, state}
+    end
   end
 
   @impl true
-  def handle_call({:activate, email, record}, _from, state) do
-    updated_record = %{record | validated: true}
-    :ets.insert(:email_table, {email, updated_record})
-    {:reply, :ok, Map.put(state, email, record)}
+  def handle_call({:activate, email, hash}, _from, state) do
+    query =
+      from(u in User,
+        where: u.email == ^email and u.hash == ^hash,
+        select: u
+      )
+
+    case Repo.one(query) do
+      nil ->
+        {:reply, {:error, :not_present}, state}
+
+      user ->
+        user
+        |> Ecto.Changeset.change(validated: true)
+        |> Repo.update()
+
+        {:reply, :ok, state}
+    end
   end
 
   ##### PRIVATE #####
 
-  def save_into_db(email, hash) do
+  defp save_into_db(email, hash) do
     %User{}
     |> User.changeset(%{email: email, hash: hash})
-  end
-
-  @spec lookup(String.t) :: {:ok, any()} | {:error, atom()}
-  def lookup(email) do
-    query = from u in User,
-          where: u.email == ^email,
-          select: u
-    Repo.one(query)
-  end
-
-  defp do_register(email) do
-    GenServer.call(@me, {:register, email})
-  end
-
-  defp do_activate(email, record) do
-    GenServer.call(@me, {:activate, email, record})
+    |> Repo.insert()
   end
 end
