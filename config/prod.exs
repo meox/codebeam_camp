@@ -23,7 +23,10 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
     keyfile: "/etc/letsencrypt/live/www.codebeam.camp/privkey.pem",
     certfile: "/etc/letsencrypt/live/www.codebeam.camp/fullchain.pem"
   ],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  root: ".",
+  version: Application.spec(:codebeam_camp, :vsn)
 
 # Do not print debug messages in production
 config :logger, level: :info

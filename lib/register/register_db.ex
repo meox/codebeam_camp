@@ -25,9 +25,11 @@ defmodule CodebeamCamp.RegisterDB do
 
   def list_emails(with_pending \\ false) do
     query =
-      from(u in User,
-        where: u.validated == ^with_pending
-      )
+      if with_pending do
+        User
+      else
+        from(u in User, where: u.validated == true)
+      end
 
     query
     |> Repo.all()
@@ -38,14 +40,19 @@ defmodule CodebeamCamp.RegisterDB do
 
   @impl true
   def handle_call({:register, email}, _from, state) do
-    hash = UUID.uuid4()
+    query = from(u in User, where: u.email == ^email, select: u.hash)
+    case Repo.one(query) do
+      nil ->
+        hash = UUID.uuid4()
+        case save_into_db(email, hash) do
+          {:ok, _record} ->
+            {:reply, {:ok, hash}, state}
 
-    case save_into_db(email, hash) do
-      {:ok, _record} ->
-        {:reply, {:ok, hash}, state}
-
-      {:error, [{:email, _error}]} ->
-        {:reply, {:error, :already_registered}, state}
+          {:error, [{:email, _error}]} ->
+            {:reply, {:error, :db_error}, state}
+        end
+      hash ->
+        {:reply, {:error, :already_registered, hash}, state}
     end
   end
 
@@ -66,7 +73,7 @@ defmodule CodebeamCamp.RegisterDB do
         |> Ecto.Changeset.change(validated: true)
         |> Repo.update()
 
-        {:reply, :ok, state}
+        {:reply, {:ok, :validated}, state}
     end
   end
 

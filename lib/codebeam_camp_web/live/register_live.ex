@@ -36,14 +36,19 @@ defmodule CodebeamCamp.RegisterLiveView do
       false ->
         {:noreply, assign(socket, registered: false, btn_status: "Invalid")}
 
-      {:error, :already_registered} ->
+      {:error, :already_registered, hash} ->
+        Mailer.send(email, hash)
         {:noreply, assign(socket, registered: false, btn_status: "Present")}
+
+      {:error, :db_error} ->
+        Logger.error("cannot insert #{inspect(value)} into db")
+        {:noreply, assign(socket, registered: false, btn_status: "Ooops!")}
     end
   end
 
   def handle_event("validate", %{"email" => ""} = value, socket) do
     Logger.info("validate user: #{inspect(value)}")
-    {:noreply, assign(socket, email_valid: true, registered: false)}
+    {:noreply, assign(socket, email_valid: true, registered: false, btn_status: "Subscribe")}
   end
 
   def handle_event("validate", %{"email" => email} = value, socket) do
