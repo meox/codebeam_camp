@@ -46,7 +46,4 @@ npm-debug.log
 
 .directory
 
-sendgrid.env
-
-email_table.tab
-
+set_env_email.sh

@@ -23,8 +23,9 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
   ]
 
 config :codebeam_camp, CodebeamCamp.Mailer,
-  adapter: Bamboo.SendGridAdapter,
-  api_key: System.get_env("SENDGRID_API_KEY")
+  adapter: Bamboo.MailjetAdapter,
+  api_key: System.get_env("EMAIL_API_KEY"),
+  api_private_key: System.get_env("EMAIL_PRIVATE_API_KEY")
 
 # Configures Elixir's Logger
 config :logger, :console,

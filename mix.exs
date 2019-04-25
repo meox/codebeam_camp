@@ -42,6 +42,7 @@ defmodule CodebeamCamp.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:elixir_uuid, "~> 1.2"},
       {:bamboo, "~> 1.2"},
+      {:bamboo_mailjet, git: "https://github.com/fpalluel/bamboo_mailjet"},
       {:gettext, "~> 0.11"},
       {:persistent_ets, "~> 0.1.0"},
       {:jason, "~> 1.0"},
