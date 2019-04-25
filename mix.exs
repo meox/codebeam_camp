@@ -4,7 +4,7 @@ defmodule CodebeamCamp.MixProject do
   def project do
     [
       app: :codebeam_camp,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -19,7 +19,7 @@ defmodule CodebeamCamp.MixProject do
   def application do
     [
       mod: {CodebeamCamp.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :wx, :observer]
     ]
   end
 
