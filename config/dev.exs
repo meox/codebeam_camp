@@ -57,6 +57,8 @@ config :codebeam_camp, CodebeamCampWeb.Endpoint,
     ]
   ]
 
+config :codebeam_camp, :email_host, "http://127.0.0.1:4000"
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
