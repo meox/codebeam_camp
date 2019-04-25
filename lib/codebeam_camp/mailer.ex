@@ -5,10 +5,10 @@ defmodule CodebeamCamp.Mailer do
   def send(email, hash) do
     Email.new_email(
       to: email,
-      from: "meox@codebeam.camp",
+      from: "contact@codebeam.camp",
       subject: "Welcome to the CodeBeam.Camp",
       html_body:
-        "Thanks for joining!<br><br>You can <a href=\"https://www.codebeam.camp/active_sub?email=#{
+        "<h1>Thanks for joining!</hr><br><br>You can <a href=\"https://www.codebeam.camp/active_sub?email=#{
           email
         }&hash=#{hash}\">activate</a> it now.",
       text_body:
@@ -16,6 +16,6 @@ defmodule CodebeamCamp.Mailer do
           email
         }&hash=#{hash}"
     )
-    |> deliver_now()
+    |> deliver_later()
   end
 end
