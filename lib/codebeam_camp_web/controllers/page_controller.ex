@@ -30,12 +30,6 @@ defmodule CodebeamCampWeb.PageController do
   def events do
     [
       %{
-        name: "Code BEAM STO",
-        date: "16-17 May 2019",
-        location: "Stockholm",
-        url: "https://codesync.global/conferences/code-beam-sto-2019/"
-      },
-      %{
         name: "Code Elixir LDN",
         date: "18 July 2019",
         location: "London",
@@ -46,6 +40,12 @@ defmodule CodebeamCampWeb.PageController do
         date: "29-30 August 2019",
         location: "Aurora, CO",
         url: "https://elixirconf.com/2019/"
+      },
+      %{
+        name: "GigCityElixir",
+        date: "18-19 October 2019",
+        location: "Chattanooga, Tn",
+        url: "https://www.gigcityelixir.com/"
       }
     ]
   end
